@@ -1,4 +1,4 @@
-const baseURL = "http://127.0.0.1:5500"
+const baseURL = "http://127.0.0.1:5501"
 
 
 // Autenticação usuário
@@ -13,7 +13,7 @@ function loginFireBase(email, senha){
     })
     .catch(error => {
         let mensagem = '';
-        switch(error.code){
+        switch(error.message){
             case 'auth/invalid-email':
                 mensagem = 'O E-mail informado é inválido!'
                 break;
@@ -35,7 +35,18 @@ function NovoUsuario(email,senha){
         window.location.href = `${baseURL}/index.html`
     })
     .catch(error => {
-        alert(`Não foi possivel cadastrar o usuário`)
+        let mensagem = '';
+        switch(error.code){
+            case 'auth/invalid-email':
+                mensagem = 'O E-mail informado é inválido!'
+                break;
+            case 'auth/email-already-exists':
+                mensagem = 'O e-mail informado já está sendo utilizado!'
+                break;
+            default:
+                mensagem = error.message    
+        }
+        alert(`Não foi possivel cadastrar o usuário: ${mensagem}`)
         console.log(error.message);
     })
 }

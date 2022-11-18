@@ -11,25 +11,90 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <nav id="Nav" class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
-            <a class="navbar-brand" href="#">Fatec Itu</a>
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#">Inicio</a>
-                    </li>
-                </ul>
-            </div>
-            <div class="text-right">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <button class="btn btn-danger">Logout</button>
-                    </li>
-                </ul>
-            </div>
+          <a class="navbar-brand" href="#">Controle Financeiro</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="text-right">
+            <ul class="navbar-nav ms-auto flex-nowrap">
+                <li class="nav-item">
+                  <button class="btn  btn-block btn-danger" onclick="logoutFirebase()">Logout</button>
+                </li>
+            </ul>
         </div>
-    </nav>
+        </div>
+      </nav>
+      
+      <div class="container-fluid" id="base">
+        <div class="row">
+        <div class="col-md-4">
+          <h1 class="TCadastro">💵Cadastro de compra</h1>
+          <form id="formCadastro">
+            <div class="form-group mt-3">
+              <label for="produto">Produto:</label>
+              <input type="text" class="form-control" name="produto" id="produto" placeholder="Produto" autofocus>
+            </div>
+            <div class="form-group mt-3">
+              <label for="preco">Preço:</label>
+              <input type="number" class="form-control" name="preco" step="0.01" id="preco" placeholder="Preço do Produto" min="1">
+            </div>
+            <div class="form-group mt-3">
+              <label for="dataCompra">Data da Compra:</label>
+              <input type="date" class="form-control" name="dataCompra" id="dataCompra">
+            </div>
+            <div class="form-group my-3" >
+              <label for="sexo">Situação de Pagamento:</label>
+              <input type="radio" class="btn-check" name="Pago" id="Pago"  value="Pago" checked>
+              <label class="btn btn-outline-info" for="Pago">Pago</label>
+            
+              <input type="radio" class="btn-check" name="NaoPago" id="NaoPago" value="NaoPago">
+              <label class="btn btn-outline-danger" for="NaoPago">Não Pago</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                    Cartão de Crédito
+                </label> <br>
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  Cartão de Débito
+                </label> <br>
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
+                <label class="form-check-label" for="flexCheckDefault">
+                  Dinheiro
+                </label>
+            </div>
+            <div class="form-group">
+              <input type="hidden" class="form-control" name="id" id="id" >
+            </div>
+            <button class="btn btn-block btn-success my-4" onclick="salvar(event, 'pessoas')">💾 Salvar</button>
+            <button type="reset" class="btn btn-block btn-primary my-4" >🔃 Limpar</button>
+          </form>
+        </div>
+      
+    
+        <div class="col-md-7">
+          <h1 class="text-info">📝Listagem de Compras</h1>
+          <table id="tabelaDados" class="table table-bordered table-striped">
+           <!-- Conteúdo do Firebase será carregado aqui -->
+          </table>
+    
+        </div>
+      </div>
+    </div>
+    <!-- Firebase Google -->
+      <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-analytics.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-auth.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-database.js"></script>
+    <!-- Bootstrap 5 JS-->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Nossos scripts -->
+      <script src="js/firebase.js"></script>  
+      <script src="js/authentication.js"></script>
+      <script src="js/dados.js"></script>
 </body>
 
 </html>
