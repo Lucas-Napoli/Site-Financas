@@ -10,7 +10,7 @@
     <title>Controle Finanças</title>
 </head>
 
-<body>
+<body onload="obtemDados('pessoas')">
     <nav id="Nav" class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">Controle Financeiro</a>
@@ -46,10 +46,10 @@
             </div>
             <div class="form-group my-3" >
               <label for="sexo">Situação de Pagamento:</label>
-              <input type="radio" class="btn-check" name="Pago" id="Pago"  value="Pago" checked>
+              <input type="radio" class="btn-check" name="situacao" id="Pago"  value="Pago" checked>
               <label class="btn btn-outline-info" for="Pago">Pago</label>
             
-              <input type="radio" class="btn-check" name="NaoPago" id="NaoPago" value="NaoPago">
+              <input type="radio" class="btn-check" name="situacao" id="NaoPago" value="NaoPago">
               <label class="btn btn-outline-danger" for="NaoPago">Não Pago</label>
             </div>
             <div class="form-check">
@@ -69,15 +69,15 @@
             <div class="form-group">
               <input type="hidden" class="form-control" name="id" id="id" >
             </div>
-            <button class="btn btn-block btn-success my-4" onclick="salvar(event, 'pessoas')">💾 Salvar</button>
-            <button type="reset" class="btn btn-block btn-primary my-4" >🔃 Limpar</button>
+            <button class="btn btn-block btn-success my-4" onclick="salvarCompra(event, 'pessoas')">💾 Salvar</button>
+            <button type="reset" class="btn btn-block btn-primary my-4" >🧹 Limpar</button>
           </form>
         </div>
       
     
         <div class="col-md-7">
-          <h1 class="text-info">📝Listagem de Compras</h1>
-          <table id="tabelaDados" class="table table-bordered table-striped">
+          <h1 class="text-info">📝Controle de Compras</h1>
+          <table id="tabelaCompra" class="table table-bordered table-striped">
            <!-- Conteúdo do Firebase será carregado aqui -->
           </table>
     
@@ -92,9 +92,9 @@
     <!-- Bootstrap 5 JS-->
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Nossos scripts -->
-      <script src="js/firebase.js"></script>  
-      <script src="js/authentication.js"></script>
-      <script src="js/dados.js"></script>
+      <script src="Scripts/firebase.js"></script>  
+      <script src="Scripts/authentication.js"></script>
+      <script src="Scripts/dados.js"></script>
 </body>
 
 </html>
