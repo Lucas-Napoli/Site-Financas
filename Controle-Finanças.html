@@ -10,7 +10,7 @@
     <title>Controle Finanças</title>
 </head>
 
-<body onload="obtemDados('pessoas')" class="BdCadastro">
+<body onload="verificaLogado();obtemDados('pessoas')" class="BdCadastro">
     <nav id="Nav" class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">Controle Financeiro</a>
@@ -19,8 +19,11 @@
           </button>
           <div class="text-right">
             <ul class="navbar-nav ms-auto flex-nowrap">
+              <li class="nav-item">
+                  <h1 id="NomeUsuario"></h1>
+              </li>
                 <li class="nav-item">
-                  <button class="btn  btn-block btn-danger" onclick="logoutFirebase()">Logout</button>
+                  <button class="btn  btn-block btn-danger" onclick="logout()">Logout</button>
                 </li>
             </ul>
         </div>
@@ -38,7 +41,7 @@
             </div>
             <div class="form-group mt-3">
               <label for="preco">Preço:</label>
-              <input type="number" class="form-control" name="preco" step="0.01" id="preco" placeholder="Preço do Produto" min="1">
+              <input type="number" class="form-control" name="preco" step="0.01" id="preco" placeholder="Preço do Produto" min="1" >
             </div>
             <div class="form-group mt-3">
               <label for="dataCompra">Data da Compra:</label>
@@ -73,7 +76,7 @@
       
     
         <div class="col-md-7">
-          <h1 class="text-info">📝Controle de Compras</h1>
+          <h1 class="TCadastro">📝Controle de Compras</h1>
           <table id="tabelaCompra" class="table table-bordered table-striped">
            
           </table>

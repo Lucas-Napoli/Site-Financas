@@ -1,10 +1,9 @@
 function salvarCompra(event, collection) {
-    event.preventDefault() // evita que o formulário seja recarregado
-    //Verificando os campos obrigatórios
+    event.preventDefault() 
     if (document.getElementById('produto').value === '') { alert('⚠ É obrigatório informar o nome!') }
     else if (document.getElementById('preco').value === '') { alert('⚠ É obrigatório informar o preço!') }
     else if (document.getElementById('dataCompra').value === '') { alert('⚠ É obrigatório informar a data de compra!') }
-    else if (document.getElementById('id').value !== '') { alterar(event, collection) }
+    else if (document.getElementById('id').value !== '') { alterarDados(event, collection) }
     else { incluirCompra(event, collection) }
 }
 
@@ -16,7 +15,7 @@ function incluirCompra(event, collection) {
     return firebase.database().ref(collection).push(values)
         .then(() => {
             alert('✔ Registro cadastrado com sucesso!')
-            document.getElementById('formCadastro').reset() //limpar o formulário
+            document.getElementById('formCadastro').reset() 
         })
         .catch(error => {
             console.error(`Ocorreu um erro: ${error.code}-${error.message}`)
@@ -31,32 +30,31 @@ function obtemDados(collection) {
         let cabecalho = tabela.insertRow()
         cabecalho.className = 'table-info'
         cabecalho.insertCell().textContent = 'Produto'
-        cabecalho.insertCell().textContent = 'Preço'
         cabecalho.insertCell().textContent = 'Data da Compra'
+        cabecalho.insertCell().textContent = 'Preço'
         cabecalho.insertCell().textContent = 'Situação'
         cabecalho.insertCell().textContent = 'Forma de Pagamento'
         cabecalho.insertCell().textContent = 'Opções'
 
         snapshot.forEach(item => {
             //Dados do Firebase
-            let db = item.ref.path.pieces_[0] //collection
-            let id = item.ref.path.pieces_[1] //id
+            let db = item.ref.path.pieces_[0] 
+            let id = item.ref.path.pieces_[1] 
             let registro = JSON.parse(JSON.stringify(item.val()))
-            //Criando as novas linhas na tabela
             let novalinha = tabela.insertRow()
             novalinha.insertCell().textContent = item.val().produto
             novalinha.insertCell().textContent = new Date(item.val().dataCompra).toLocaleDateString()
-            novalinha.insertCell().textContent = item.val().preco
+            novalinha.insertCell().textContent = "R$ " + item.val().preco
             novalinha.insertCell().textContent = item.val().situacao
             novalinha.insertCell().textContent = item.val().Pagamento
             novalinha.insertCell().innerHTML =
                 `
             <button class ='btn btn-danger' title='Remove o registro corrente' onclick=remover('${db}','${id}')>🗑 Excluir </button>
-            <button class ='btn btn-warning' title='Edita o registro corrente' onclick=carregaDadosAlteracao('${db}','${id}')>✏ Editar </button>
+            <button class ='btn btn-primary' title='Edita o registro corrente' onclick=carregaDadosAlteracao('${db}','${id}')>✏ Editar </button>
             `
         })
         let rodape = tabela.insertRow()
-        rodape.className = 'table-primary'
+        rodape.className = 'table-success'
         rodape.insertCell().textContent = ''
         rodape.insertCell().textContent = ''
         rodape.insertCell().textContent = ''
@@ -70,7 +68,7 @@ function totalRegistros(collection) {
     var retorno = '...'
     firebase.database().ref(collection).on('value', (snapshot) => {
         if (snapshot.numChildren() === 0) {
-            retorno = '‼ Ainda não há nenhum Produto cadastrado!'
+            retorno = 'Ainda não há nenhum Produto cadastrado!'
         } else {
             retorno = `Total de Registros: ${snapshot.numChildren()}`
         }
@@ -79,7 +77,6 @@ function totalRegistros(collection) {
 }
 
 function remover(db, id) {
-    //Iremos confirmar com o usuário
     if (window.confirm('Excluir Produto?')) {
         let dadoExclusao = firebase.database().ref().child(db + '/' + id)
         dadoExclusao.remove()
@@ -121,15 +118,13 @@ function carregaDadosAlteracao(db, id) {
     })
 }
 
-function alterar(event, collection) {
+function alterarDados(event, collection) {
     event.preventDefault()
-    //Obtendo os campos do formulário
+  
     const form = document.forms[0];
     const data = new FormData(form);
-    //Obtendo os valores dos campos
     const values = Object.fromEntries(data.entries());
     console.log(values)
-    //Enviando os dados dos campos para o Firebase
     return firebase.database().ref().child(collection + '/' + values.id).update({
         produto: values.produto,
         preco: values.preco,
