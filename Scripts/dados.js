@@ -97,9 +97,9 @@ function carregaDadosAlteracao(db, id) {
         snapshot.forEach(item => {
             if (item.ref.path.pieces_[1] === id) {
                 document.getElementById('id').value = item.ref.path.pieces_[1]
-                document.getElementById('produto').value = item.val().nome
-                document.getElementById('preco').value = item.val().email
-                document.getElementById('dataCompra').value = item.val().nascimento
+                document.getElementById('produto').value = item.val().produto
+                document.getElementById('preco').value = item.val().preco
+                document.getElementById('dataCompra').value = item.val().dataCompra
                 if (item.val().situacao === 'Pago') {
                     document.getElementById('Pago').checked = true
                 } else {
@@ -119,4 +119,31 @@ function carregaDadosAlteracao(db, id) {
             }
         })
     })
+}
+
+function alterar(event, collection) {
+    event.preventDefault()
+    //Obtendo os campos do formulário
+    const form = document.forms[0];
+    const data = new FormData(form);
+    //Obtendo os valores dos campos
+    const values = Object.fromEntries(data.entries());
+    console.log(values)
+    //Enviando os dados dos campos para o Firebase
+    return firebase.database().ref().child(collection + '/' + values.id).update({
+        produto: values.produto,
+        preco: values.preco,
+        situacao: values.situacao,
+        dataCompra: values.dataCompra,
+        Pagamento: values.Pagamento
+    })
+        .then(() => {
+            alert('✅ Registro alterado com sucesso!')
+            document.getElementById('formCadastro').reset()
+        })
+        .catch(error => {
+            console.log(error.code)
+            console.log(error.message)
+            alert('❌ Falha ao alterar: ' + error.message)
+        })
 }
