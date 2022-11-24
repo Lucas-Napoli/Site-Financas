@@ -10,7 +10,7 @@
     <title>Controle Finanças</title>
 </head>
 
-<body onload="obtemDados('pessoas')">
+<body onload="obtemDados('pessoas')" class="BdCadastro">
     <nav id="Nav" class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">Controle Financeiro</a>
@@ -45,26 +45,23 @@
               <input type="date" class="form-control" name="dataCompra" id="dataCompra">
             </div>
             <div class="form-group my-3" >
-              <label for="sexo">Situação de Pagamento:</label>
+              <label for="situacao">Situação de Pagamento:</label>
               <input type="radio" class="btn-check" name="situacao" id="Pago"  value="Pago" checked>
               <label class="btn btn-outline-info" for="Pago">Pago</label>
             
-              <input type="radio" class="btn-check" name="situacao" id="NaoPago" value="NaoPago">
+              <input type="radio" class="btn-check" name="situacao" id="NaoPago" value="Não Pago">
               <label class="btn btn-outline-danger" for="NaoPago">Não Pago</label>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                <label class="form-check-label" for="flexCheckDefault">
-                    Cartão de Crédito
-                </label> <br>
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                <label class="form-check-label" for="flexCheckDefault">
-                  Cartão de Débito
-                </label> <br>
-                <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-                <label class="form-check-label" for="flexCheckDefault">
-                  Dinheiro
-                </label>
+            <div class="form-group my-3" >
+              <label for="Pagamento">Situação de Pagamento:</label>
+              <input type="radio" class="btn-check" name="Pagamento" id="Credito"  value="Cartão de Crédito" checked> <br>
+              <label class="btn btn-outline-secondary" for="Credito">Cartão de Crédito</label> 
+            
+              <input type="radio" class="btn-check" name="Pagamento" id="Debito"  value="Cartão de Débito" >
+              <label class="btn btn-outline-info" for="Debito">Cartão de Débito</label>
+
+              <input type="radio" class="btn-check" name="Pagamento" id="Dinheiro"  value="Dinheiro" >
+              <label class="btn btn-outline-success" for="Dinheiro">Dinheiro</label>
             </div>
             <div class="form-group">
               <input type="hidden" class="form-control" name="id" id="id" >
@@ -78,20 +75,18 @@
         <div class="col-md-7">
           <h1 class="text-info">📝Controle de Compras</h1>
           <table id="tabelaCompra" class="table table-bordered table-striped">
-           <!-- Conteúdo do Firebase será carregado aqui -->
+           
           </table>
     
         </div>
       </div>
     </div>
-    <!-- Firebase Google -->
+    
       <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-app.js"></script>
       <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-analytics.js"></script>
       <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-auth.js"></script>
       <script src="https://www.gstatic.com/firebasejs/8.2.4/firebase-database.js"></script>
-    <!-- Bootstrap 5 JS-->
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Nossos scripts -->
       <script src="Scripts/firebase.js"></script>  
       <script src="Scripts/authentication.js"></script>
       <script src="Scripts/dados.js"></script>

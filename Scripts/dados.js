@@ -48,7 +48,7 @@ function obtemDados(collection) {
             novalinha.insertCell().textContent = new Date(item.val().dataCompra).toLocaleDateString()
             novalinha.insertCell().textContent = item.val().preco
             novalinha.insertCell().textContent = item.val().situacao
-            novalinha.insertCell().textContent = item.val().flexCheckDefault
+            novalinha.insertCell().textContent = item.val().Pagamento
             novalinha.insertCell().innerHTML =
                 `
             <button class ='btn btn-danger' title='Remove o registro corrente' onclick=remover('${db}','${id}')>🗑 Excluir </button>
@@ -70,7 +70,7 @@ function totalRegistros(collection) {
     var retorno = '...'
     firebase.database().ref(collection).on('value', (snapshot) => {
         if (snapshot.numChildren() === 0) {
-            retorno = '‼ Ainda não há nenhum registro cadastrado!'
+            retorno = '‼ Ainda não há nenhum Produto cadastrado!'
         } else {
             retorno = `Total de Registros: ${snapshot.numChildren()}`
         }
@@ -84,7 +84,7 @@ function remover(db, id) {
         let dadoExclusao = firebase.database().ref().child(db + '/' + id)
         dadoExclusao.remove()
             .then(() => {
-                alert('✅Registro removido com sucesso!')
+                alert('✅Produto removido com sucesso!')
             })
             .catch(error => {
                 alert('❌Falha ao excluir: ' + error.message)
@@ -100,11 +100,21 @@ function carregaDadosAlteracao(db, id) {
                 document.getElementById('produto').value = item.val().nome
                 document.getElementById('preco').value = item.val().email
                 document.getElementById('dataCompra').value = item.val().nascimento
-                document.getElementById('situacao').value = item.val().salario
                 if (item.val().situacao === 'Pago') {
                     document.getElementById('Pago').checked = true
                 } else {
                     document.getElementById('NaoPago').checked = true
+                }
+                
+                switch(item.val().Pagamento != ''){
+                    case 'Cartão de Crédito':
+                        document.getElementById('Credito').checked = true
+                        break;
+                    case 'Cartão de Débito':
+                        document.getElementById('Debito').checked = true
+                        break;
+                    default:
+                        document.getElementById('Dinheiro').checked = true
                 }
             }
         })
