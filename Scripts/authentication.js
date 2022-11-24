@@ -19,13 +19,14 @@ function loginFireBase(email, senha) {
                     mensagem = 'E-mail não cadastrado!'
                     break;
                 case 'auth/wrong-password':
-                    mensagem = 'Senha Incorreta, digite novamente!'
+                    mensagem = 'Senha incorreta, digite novamente!'
                     break;
                 default:
                     mensagem = 'tente novamente!'
             }
             alert(`Não foi possivel cadastrar o usuário: ${mensagem}`)
             console.log(error.message);
+            console.log(error.code);
         })
 }
 
@@ -83,3 +84,4 @@ function verificaLogado() {
             }
       })
 }
+

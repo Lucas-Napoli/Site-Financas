@@ -44,13 +44,13 @@ function obtemDados(collection) {
             let novalinha = tabela.insertRow()
             novalinha.insertCell().textContent = item.val().produto
             novalinha.insertCell().textContent = new Date(item.val().dataCompra).toLocaleDateString()
-            novalinha.insertCell().textContent = "R$ " + item.val().preco
+            novalinha.insertCell().textContent = "R$" + item.val().preco
             novalinha.insertCell().textContent = item.val().situacao
             novalinha.insertCell().textContent = item.val().Pagamento
             novalinha.insertCell().innerHTML =
                 `
-            <button class ='btn btn-danger' title='Remove o registro corrente' onclick=remover('${db}','${id}')>🗑 Excluir </button>
-            <button class ='btn btn-primary' title='Edita o registro corrente' onclick=carregaDadosAlteracao('${db}','${id}')>✏ Editar </button>
+            <button class ='btn btn-danger' title='Remove o registro' onclick=remover('${db}','${id}')>🗑 Excluir </button>
+            <button class ='btn btn-primary' title='Edita o registro' onclick=carregaDadosAlteracao('${db}','${id}')>✏ Editar </button>
             `
         })
         let rodape = tabela.insertRow()
