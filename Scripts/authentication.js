@@ -1,4 +1,4 @@
-const baseURL = "http://127.0.0.1:5501"
+const baseURL = "https://lucas-napoli.github.io/Site-Financas/"
 
 
 function loginFireBase(email, senha) {
