@@ -24,7 +24,7 @@ function loginFireBase(email, senha) {
                 default:
                     mensagem = 'tente novamente!'
             }
-            alert(`Não foi possivel cadastrar o usuário: ${mensagem}`)
+            alert(`Não foi possivel Logar com o usuário: ${mensagem}`)
             console.log(error.message);
             console.log(error.code);
         })
