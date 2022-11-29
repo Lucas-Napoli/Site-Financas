@@ -1,4 +1,6 @@
-const baseURL = "https://lucas-napoli.github.io/Site-Financas/"
+const baseURL = window.location.hostname.includes('127.0.0.1')
+? 'http://127.0.0.1:5500'
+: 'https://lucas-napoli.github.io/Site-Financas/'
 
 
 function loginFireBase(email, senha) {
