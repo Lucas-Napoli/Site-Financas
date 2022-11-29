@@ -1,6 +1,6 @@
 function salvarCompra(event, collection) {
     event.preventDefault() 
-    if (document.getElementById('produto').value === '') { alert('⚠ É obrigatório informar o nome!') }
+    if (document.getElementById('produto').value === '') { alert('⚠ É obrigatório informar o Produto!') }
     else if (document.getElementById('preco').value === '') { alert('⚠ É obrigatório informar o preço!') }
     else if (document.getElementById('dataCompra').value === '') { alert('⚠ É obrigatório informar a data de compra!') }
     else if (document.getElementById('id').value !== '') { alterarDados(event, collection) }
@@ -14,7 +14,7 @@ function incluirCompra(event, collection) {
     const values = Object.fromEntries(data.entries())
     return firebase.database().ref(collection).push(values)
         .then(() => {
-            alert('✔ Registro cadastrado com sucesso!')
+            alert('✔ Produto cadastrado com sucesso!')
             document.getElementById('formCadastro').reset() 
         })
         .catch(error => {
@@ -135,6 +135,7 @@ function alterarDados(event, collection) {
         .then(() => {
             alert('✅ Registro alterado com sucesso!')
             document.getElementById('formCadastro').reset()
+            document.getElementById('id').value = '';
         })
         .catch(error => {
             console.log(error.code)
